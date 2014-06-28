@@ -19,7 +19,7 @@ Installation
 
     cd phpdoc-md
     composer install --dev
-    sudo ln -fsv `pwd | awk '{printf $0"/bin/execute"}'` /usr/bin/phpdoc_md
+    sudo ln -fsv `pwd | awk '{printf $0"/bin/executable"}'` /usr/bin/phpdoc_md
     sudo ln -fsv `pwd | awk '{printf $0"/bin/phpdocmd"}'` /usr/bin/
 
 
