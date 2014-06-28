@@ -44,7 +44,7 @@ class Generator
    * @param string $templateDir
    * @param string $linkTemplate
    */
-  public function __construct(array $classDefinitions, $outputDir, $templateDir, $linkTemplate = '%c.md') {
+  public function __construct(array $classDefinitions, $outputDir, $templateDir, $linkTemplate = '%c') {
     $this->classDefinitions = $classDefinitions;
     $this->outputDir = $outputDir;
     $this->templateDir = $templateDir;
@@ -71,7 +71,7 @@ class Generator
       'index' => $index,
       'classDefinitions' => $this->classDefinitions,
     ));
-    file_put_contents($this->outputDir . '/index.md', $index);
+    file_put_contents($this->outputDir . '/Home.md', $index);
   }
   /**
    * Creates an index of classes and namespaces.
@@ -137,7 +137,7 @@ class Generator
         $link = strtr($linkTemplate, array(
           '%c' => $link
         ));
-        $returnedClasses[] = "[" . $myLabel . "](" . $link . ')';
+        $returnedClasses[] = "[" . $myLabel . "](" . preg_replace('/\.md$/i', '', $link) . ')';
       }
     }
     return implode('|', $returnedClasses);
