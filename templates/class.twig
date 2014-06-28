@@ -41,7 +41,7 @@ Constants
 {% if properties %}
 Properties
 ----------
-{% endif %}{% for property in properties %}
+{% for property in properties %}
 ### {{ property.name }}
 
 ```
@@ -54,8 +54,11 @@ Properties
 {% endif %}{% if property.static %}> * This property is **static**.
 {% endif %}{% if property.definedBy != className %}> * **Defined in:** {{ property.definedBy|classLink }}
 {% endif %}
-
 {% endfor %}
+
+***
+
+{% endif %}
 
 {% if methods %}
 Methods

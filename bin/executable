@@ -3,29 +3,29 @@ ACTUALDIR=$(pwd)
 TARGET=''
 DIRECTORY=''
 FILES=''
-while getopts t:f:d option
+while getopts d:t:f: option
 do
   case "${option}"
   in
-    t) TARGET=${OPTARG};;
     d) DIRECTORY=${OPTARG};;
+    t) TARGET=${OPTARG};;
     f) FILES=$OPTARG;;
   esac
 done
+echo $DIRECTORY
 COMMAND="phpdoc --template=responsive"
 if [ -z "$TARGET" ]; then
-  TARGET="$ACTUALDIR/docs"
+  TARGET="/tmp/md_docs/build"
 fi
 COMMAND="$COMMAND -t /tmp/md_docs/"
 if [ ! -z "$DIRECTORY" ]; then
-  COMMAND="$COMMAND -d '$DIRECTORY'"
+  COMMAND="$COMMAND -d $DIRECTORY"
 fi
 if [ ! -z "$FILES" ]; then
-  COMMAND="$COMMAND -f '$FILES'"
+  COMMAND="$COMMAND -f $FILES"
 fi
 if [ ! -d "$TARGET" ]; then
   mkdir $TARGET
 fi
 COMMAND="$COMMAND && phpdocmd /tmp/md_docs/structure.xml $TARGET && rm -fr /tmp/md_docs/"
 eval $COMMAND
-

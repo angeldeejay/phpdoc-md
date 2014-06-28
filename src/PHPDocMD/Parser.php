@@ -115,7 +115,7 @@ class Parser
         if (count($tag = $method->xpath('docblock/tag[@name="param" and @variable="' . $nArgument['name'] . '"]'))) {
           $tag = $tag[0];
           if ((string)$tag['type']) {
-            $nArgument['type'] = (string)$tag['type'];
+            $nArgument['type'] = (string)str_replace(array('|\\', '|\\\\'), '|', preg_replace('/^[^\w]+/i', '', $tag['type']));
           }
           if ((string)$tag['description']) {
             $nArgument['description'] = (string)strip_tags($tag['description']);
