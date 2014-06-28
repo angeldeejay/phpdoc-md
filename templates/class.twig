@@ -32,6 +32,7 @@ Constants
 {% endif %}
 {% if constant.deprecated %}> * **Warning:** this constant is **deprecated**. That means could be removed from future versions.
 {% endif %}
+
 {% endfor %}
 
 ***
@@ -54,6 +55,7 @@ Properties
 {% endif %}{% if property.static %}> * This property is **static**.
 {% endif %}{% if property.definedBy != className %}> * **Defined in:** {{ property.definedBy|classLink }}
 {% endif %}
+
 {% endfor %}
 
 ***
