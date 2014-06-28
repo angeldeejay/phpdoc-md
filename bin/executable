@@ -27,6 +27,5 @@ if [ ! -d "$TARGET" ]; then
   mkdir $TARGET
 fi
 COMMAND="$COMMAND && phpdocmd /tmp/md_docs/structure.xml $TARGET && rm -fr /tmp/md_docs/"
-$COMMAND
-echo $COMMAND
+eval $COMMAND
 
