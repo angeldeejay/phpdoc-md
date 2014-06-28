@@ -2,20 +2,20 @@ PHPDocumentor MarkDown export
 =============================
 Installation
 ------------
-Install phpDocumentor:
+**Install phpDocumentor:**
 
     sudo pear channel-discover pear.phpdoc.org
     sudo pear install phpdoc/phpDocumentor
 
-Install Composer:
+**Install Composer:**
 
     curl -sS https://getcomposer.org/installer | sudo php -- --filename=composer --install-dir=/usr/bin
 
-Clone this repo:
+**Clone this repo:**
 
     git clone git@github.com:angeldeejay/phpdoc-md.git phpdoc-md
     
-Setup:
+**Setup:**
 
     cd phpdoc-md
     composer install --dev
