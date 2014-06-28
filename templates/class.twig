@@ -3,14 +3,15 @@
 {% if description %}{{ description }}
 {% endif %}{% if longDescription %}{{ longDescription|raw }}
 {% endif %}{% if isClass %}
-{% if abstract %}* Esta clase es **abstracta**
-{% endif %}{% if extends[0] %}* Hereda de: {{ extends.0|classLink }}
-{% endif %}{% if implements %}* Esta clase implementa: {% for interface in implements %}{{ interface|classLink }}{%if not loop.last %}, {% endif %}{% endfor %}
-{% endif %}{% if deprecated %}* **Advertencia:** esta clase es **obsoleta**. Esto significa que posiblemente se eliminará en próximas versiones.{% endif %}{% endif %}
-{% if isInterface %}* Interfaz: {{ shortClass }}
-* Esta clase es una **interfaz**
-{% if extends %}* Extiende: {% for interface in extends %}{{ interface|classLink }}{%if not loop.last %}, {% endif %}{% endfor %}
-{% endif %}{% if deprecated %}* **Advertencia:** esta interfaz es **obsoleta**. Esto significa que posiblemente se eliminará en próximas versiones.
+{% if abstract %}> * This class is **abstract**
+{% endif %}{% if extends[0] %}> * **Parent:** {{ extends.0|classLink }}
+{% endif %}{% if implements %}> * **Implements:** {% for interface in implements %}{{ interface|classLink }}{%if not loop.last %}, {% endif %}{% endfor %}
+{% endif %}
+{% if isInterface %}> * Interface: {{ shortClass }}
+> * This class is a **interface**
+{% if extends %}> * **Extends:** {% for interface in extends %}{{ interface|classLink }}{%if not loop.last %}, {% endif %}{% endfor %}
+{% endif %}{% if deprecated %}> * **Warning:** this class is **deprecated**. That means could be removed from future versions.
+{% endif %}
 {% endif %}
 
 ***
@@ -18,18 +19,18 @@
 {% endif %}
 
 {% if constants %}
-Constantes
+Constants
 ----------
 {% for constant in constants %}
 ### {{ constant.name }}
-{% if constant.description %}
-> {{ constant.description }}
-{% endif %}
 
 ```
 {{ constant.signature|raw }}
 ```
-{% if constant.deprecated %}* **Advertencia:** esta constante es **obsoleta**. Esto significa que posiblemente se eliminará en próximas versiones.
+{% if constant.description %}
+> {{ constant.description }}
+{% endif %}
+{% if constant.deprecated %}> * **Warning:** this constant is **deprecated**. That means could be removed from future versions.
 {% endif %}
 {% endfor %}
 
@@ -38,38 +39,41 @@ Constantes
 {% endif %}
 
 {% if properties %}
-Propiedades
+Properties
 ----------
 {% endif %}{% for property in properties %}
 ### {{ property.name }}
-{% if property.description %}
-> {{ property.description }}
-{% endif %}
 
 ```
 {{ property.signature|raw }}
 ```
-{% if property.deprecated %}* **Advertencia:** esta propiedad es **obsoleta**. Esto significa que posiblemente se eliminará en próximas versiones.
-{% endif %}{% if property.static %}* Esta propiedad es **estática**.
-{% endif %}{% if property.definedBy != className %}* Esta propiedad está definida por {{ property.definedBy|classLink }}
+{% if property.description %}
+> {{ property.description }}
+{% endif %}
+{% if property.deprecated %}> * **Warning:** this property is **deprecated**. That means could be removed from future versions.
+{% endif %}{% if property.static %}> * This property is **static**.
+{% endif %}{% if property.definedBy != className %}> * **Defined in:** {{ property.definedBy|classLink }}
 {% endif %}
 
 {% endfor %}
 
-{% if methods %}Métodos
+{% if methods %}
+Methods
 -------
-{% for method in methods %}### {{ method.name }}
-{% if method.description %}> {{ method.description }}
-{% endif %}
+{% for method in methods %}
+### {{ method.name }}
 
 ```
 {{ method.signature|raw }}
 ```
-{% if method.abstract %}* Este método es **abstracto**.
-{% endif %}{% if method.static %}* Este método **estático**.
-{% endif %}{% if method.deprecated %}* **Advertencia:** este método es **obsoleto**. Esto significa que posiblemente se eliminará en próximas versiones.
-{% endif %}{% if method.definedBy != className %}* Este método está definido por {{ method.definedBy|classLink }}
-{% endif %}{% if method.arguments %}> #### Argumentos
+{% if method.abstract %}> * This method is **abstract**.
+{% endif %}{% if method.static %}> * This method is **static**.
+{% endif %}{% if method.deprecated %}> * **Warning:** this method is **deprecated**. That means could be removed from future versions.
+{% endif %}{% if method.definedBy != className %}> * Defined in: {{ method.definedBy|classLink }}
+{% endif %}{% if method.description %}> {{ method.description }}
+{% endif %}
+{% if method.arguments %}
+> #### Parameters
 {% for argument in method.arguments %}
 > * **{% if argument.type %}{{ argument.type|classLink }}{% else %}mixed{% endif %}** `{{ argument.name }}`{% if argument.description %} _{{ argument.description }}_{% endif %}
 
